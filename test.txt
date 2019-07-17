@@ -1,0 +1,15 @@
+# ::snt export of high-tech products has frequently been in the spotlight , making a significant contribution to the growth of foreign trade in guangdong .
+# ::tok export of high - tech products has frequently been in the spotlight , making a significant contribution to the growth of foreign trade in guangdong .
+# ::alignments 24-25|0 22-23|0.0 21-22|0.0.1.0.1.0 19-20|0.0.1 16-17|0.0.1.0 15-16|0.0.1.0.1 11-12|0.0.0.0 7-8|0.0.0 5-6|0.0.1.0.0.0 4-5|0.0.1.0.0.0.0 2-3|0.0.1.0.0.0.0.0 0-1|0.0.1.0.0 ::annotator JAMR dev v0.3 ::date 2019-07-08T23:42:17.243
+(g / guangdong
+      :ARG2-of (t / trade-01
+            :ARG1 (f2 / frequent-02
+                  :ARG1 (s2 / spotlight))
+            :ARG1-of (g2 / grow-01
+                  :ARG2-of (c / contribute-01
+                        :ARG1 (e / export-01
+                              :ARG1 (p / product
+                                    :mod (t2 / tech
+                                          :ARG1-of (h / high-02))))
+                        :ARG1-of (s / significant-02
+                              :compared-to (f / foreign))))))

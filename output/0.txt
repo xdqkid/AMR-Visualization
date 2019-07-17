@@ -1,0 +1,14 @@
+digraph "AMR-Graph" {
+	rankdir=TB
+	"frequent-02" -> spotlight [label=":ARG1"]
+	"trade-01" -> "frequent-02" [label=":ARG1"]
+	tech -> "high-02" [label=":ARG1-of"]
+	product -> tech [label=":mod"]
+	"export-01" -> product [label=":ARG1"]
+	"contribute-01" -> "export-01" [label=":ARG1"]
+	"significant-02" -> foreign [label=":compared-to"]
+	"contribute-01" -> "significant-02" [label=":ARG1-of"]
+	"grow-01" -> "contribute-01" [label=":ARG2-of"]
+	"trade-01" -> "grow-01" [label=":ARG1-of"]
+	guangdong -> "trade-01" [label=":ARG2-of"]
+}

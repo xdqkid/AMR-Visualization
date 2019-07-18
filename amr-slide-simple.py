@@ -1,6 +1,16 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+'''
+xdqkid
+https://github.com/xdqkid/AMR-Visualization
+'''
+
 from graphviz import Digraph
 import shutil
+import os
 import sys
+import random
 
 def convert2graph(amr_lines, amr_count):
     # Preprocess bracket
@@ -45,8 +55,12 @@ def convert2graph(amr_lines, amr_count):
 
 def build_relations(line, relations=[], concept_map={}):
     if len(line) == 1:
-        id = line[0]
-        concept_map[id] = id
+        while True:
+            id = str(random.randint(0, 1000))
+            name = concept_map.get(id)
+            if name == None:
+                break
+        concept_map[id] = line[0]
         return id
     line = line[1:-1]
     alen = len(line)
@@ -76,15 +90,15 @@ def draw(relations, concept_map, amr_count):
     f = Digraph('AMR-Graph', filename=filename)
     f.attr(rankdir='TB')
     for a, b, l in relations:
-        try:
-            f.edge(concept_map[a], concept_map[b], label=l)
-        except Exception:
-            f.edge(concept_map[a], concept_map[a], label=l)
+        f.node(a, concept_map[a])
+        f.node(b, concept_map[b])
+        f.edge(a, b, l)
     f.render(filename=filename, view=False)
 
 def load_amr(fpath):
     try:
         shutil.rmtree('./output/*')
+        os.mkdir('./output')
     except Exception:
         pass
     with open(fpath, mode='r', encoding='utf-8') as fp:

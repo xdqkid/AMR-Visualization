@@ -14,7 +14,6 @@ import random
 
 def convert2graph(amr_lines, amr_count):
     # Preprocess bracket
-    amr_lines = ' '.join(amr_lines)
     newline = ''
     quotes = False
     for ele in amr_lines:
@@ -31,11 +30,14 @@ def convert2graph(amr_lines, amr_count):
                 .replace('  ', ' ').split()
     # Check Format
     count = 0
+    complex_format=False
     for ele in line:
         if ele == '(':
             count += 1
         if ele == ')':
             count -= 1
+        if ele == '/':
+            complex_format = True
         if count < 0:
             print('[Error]Too many right bracket )')
             exit()
@@ -44,7 +46,10 @@ def convert2graph(amr_lines, amr_count):
         exit()
     relations = []
     concept_map = {}
-    build_relations(line, relations=relations, concept_map=concept_map)
+    if complex_format:
+        build_relations(line, relations=relations, concept_map=concept_map)
+    else:
+        build_relations_simple(line, relations=relations, concept_map=concept_map)
     # Postprocess bracket
     for key in concept_map.keys():
         concept_map[key] = concept_map[key] \
@@ -52,14 +57,44 @@ def convert2graph(amr_lines, amr_count):
                             .replace('&gt;', ')')
     draw(relations, concept_map, amr_count)
 
+def generate_id(concept_map):
+    while True:
+        id = str(random.randint(0, 1000))
+        name = concept_map.get(id)
+        if name == None:
+            break
+    return id
+
+def build_relations_simple(line, relations=[], concept_map={}):
+    if line[0] == '(':
+        line = line[1:-1]
+    alen = len(line)
+    id = generate_id(concept_map)
+    concept_map[id]=line[0]
+    if alen == 1:
+        return id
+    idx = 1
+    while idx < alen:
+        relation = line[idx]
+        search = idx + 1
+        count = 0
+        while search < alen:
+            if line[search] == '(':
+                count += 1
+            if line[search] == ')':
+                count -= 1
+            if count == 0:
+                break
+            search += 1
+        son_id = build_relations_simple(line[idx+1:search+1], relations=relations, concept_map=concept_map)
+        relations += [(id, son_id, relation)]
+        idx = search + 1
+    return id
+
 
 def build_relations(line, relations=[], concept_map={}):
     if len(line) == 1:
-        while True:
-            id = str(random.randint(0, 1000))
-            name = concept_map.get(id)
-            if name == None:
-                break
+        id = generate_id(concept_map)
         concept_map[id] = line[0]
         return id
     line = line[1:-1]
@@ -102,21 +137,16 @@ def load_amr(fpath):
     except Exception:
         pass
     with open(fpath, mode='r', encoding='utf-8') as fp:
-        amr_lines = []
         amr_count = 0
         for line in fp:
             if line.startswith('#'):
                 continue
             if line.strip() == '':
-                if len(amr_lines) != 0:
-                    convert2graph(amr_lines, amr_count)
-                    amr_count += 1
-                    amr_lines = []
                 continue
-            amr_lines += [line.strip()]
-        if len(amr_lines) != 0:
-            convert2graph(amr_lines, amr_count)
+            convert2graph(line, amr_count)
+            amr_count += 1
+
 
 
 if __name__ == "__main__":
-    load_amr('test.txt' if len(sys.argv) == 1 else sys.argv[1])
+    load_amr('test_single.txt' if len(sys.argv) == 1 else sys.argv[1])

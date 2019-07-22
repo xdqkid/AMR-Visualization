@@ -1,0 +1,3 @@
+gold :op1 interrogative
+know :arg0 you :arg1 it :beneficiary interrogative :mod ( country :name ( name :op1 wouldn )  )  :polarity -
+(g / guangdong :ARG2-of (t / trade-01 :ARG1 (f2 / frequent-02 :ARG1 (s2 / spotlight)) :ARG1-of (g2 / grow-01 :ARG2-of (c / contribute-01 :ARG1 (e / export-01 :ARG1 (p / product :mod (t2 / tech :ARG1-of (h / high-02)))) :ARG1-of (s / significant-02 :compared-to (f / foreign))))))

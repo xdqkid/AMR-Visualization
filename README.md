@@ -6,7 +6,9 @@ Abstract Meaning Representation Visualization
 ## Quickstart
 
 ```python
-  python amr-slide-simple.py AMR-file.txt
+python amr-slide-simple.py AMR-file.txt
+or
+python amr-slide-single-line.py AMR-file-with-single-line-format.txt
 ```
 
 - Python3.5+
@@ -42,7 +44,17 @@ AMR-file.txt
 
 ```
 
-Visualization:
+AMR-file-with-single-line-format.txt
+
+```
+gold :op1 interrogative
+know :arg0 you :arg1 it :beneficiary interrogative :mod ( country :name ( name :op1 wouldn )  )  :polarity -
+(g / guangdong :ARG2-of (t / trade-01 :ARG1 (f2 / frequent-02 :ARG1 (s2 / spotlight)) :ARG1-of (g2 / grow-01 :ARG2-of (c / contribute-01 :ARG1 (e / export-01 :ARG1 (p / product :mod (t2 / tech :ARG1-of (h / high-02)))) :ARG1-of (s / significant-02 :compared-to (f / foreign))))))
+```
+
+
+
+Visualization(Demo Only Show Multi-line)
 
 ```
 digraph "AMR-Graph" {
@@ -75,7 +87,9 @@ AMR-Visualization,xdqkid, https://github.com/xdqkid/AMR-Visualization
 ## 快速入门
 
 ```python
-  python amr-slide-simple.py AMR-file.txt
+python amr-slide-simple.py AMR-file.txt
+or
+python amr-slide-single-line.py AMR-file-with-single-line-format.txt
 ```
 
 - Python3.5+
@@ -112,7 +126,15 @@ AMR-file.txt样例文件示意
 
 ```
 
-可视化
+AMR-file-with-single-line-format.txt样例文件示意，即单行简化的AMR图。
+
+```
+gold :op1 interrogative
+know :arg0 you :arg1 it :beneficiary interrogative :mod ( country :name ( name :op1 wouldn )  )  :polarity -
+(g / guangdong :ARG2-of (t / trade-01 :ARG1 (f2 / frequent-02 :ARG1 (s2 / spotlight)) :ARG1-of (g2 / grow-01 :ARG2-of (c / contribute-01 :ARG1 (e / export-01 :ARG1 (p / product :mod (t2 / tech :ARG1-of (h / high-02)))) :ARG1-of (s / significant-02 :compared-to (f / foreign))))))
+```
+
+可视化（这里仅展示多行，单行效果相同）
 
 ```
 digraph "AMR-Graph" {

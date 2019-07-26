@@ -1,5 +1,5 @@
 # AMR-Visualization
-AMR-Visualization Tools, show AMR graph strcucture
+AMR-Visualization Tools, show AMR graph structure.
 
 Abstract Meaning Representation Visualization 
 

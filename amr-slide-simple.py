@@ -11,6 +11,7 @@ import shutil
 import os
 import sys
 import random
+import re
 
 def convert2graph(amr_lines, amr_count):
     # Preprocess bracket
@@ -52,9 +53,12 @@ def convert2graph(amr_lines, amr_count):
                             .replace('&gt;', ')')
     draw(relations, concept_map, amr_count)
 
-
 def build_relations(line, relations=[], concept_map={}):
     if len(line) == 1:
+        if re.search('[a-z]+[0-9]+', line[0]):
+            value = concept_map.get(line[0])
+            if value != None:
+                return line[0]
         while True:
             id = str(random.randint(0, 1000))
             name = concept_map.get(id)
